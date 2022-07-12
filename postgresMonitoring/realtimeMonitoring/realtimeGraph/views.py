@@ -523,14 +523,15 @@ def get_test_data(request, **kwargs):
 
 def get_data_country(request, **kwargs):
     data_result = {}
-    country_name = "Pais1"
+    # country_name = "Pais1"
+    country_name = request.GET.get("country", "Pais1")
     selected_country = Country.objects.filter(name=country_name)[0]
     selected_location = Location.objects.filter(country=selected_country)[0]
 
     stations = Station.objects.filter(location=selected_location)
     location_data = Data.objects.filter(station__in=stations)
 
-    print(location_data)
+    print(json.dumps(location_data, indent=4, sort_keys=True))
 
     data = []
 
