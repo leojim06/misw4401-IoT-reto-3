@@ -529,13 +529,13 @@ def get_data_country(request, **kwargs):
 
     stations = Station.objects.filter(location=selected_location)
     location_data = Data.objects.filter(station__in=stations)
-    
+
 
     data = []
 
-    minVal = location_data.aggregate(Min("min_value"))["min_value__min"]
-    maxVal = location_data.aggregate(Max("max_value"))["max_value__max"]
-    avgVal = location_data.aggregate(Avg("avg_value"))["avg_value__avg"]
+    # minVal = location_data.aggregate(Min("min_value"))["min_value__min"]
+    # maxVal = location_data.aggregate(Max("max_value"))["max_value__max"]
+    # avgVal = location_data.aggregate(Avg("avg_value"))["avg_value__avg"]
 
     data.append(
         {
@@ -543,9 +543,9 @@ def get_data_country(request, **kwargs):
             "lat": selected_location.lat,
             "lng": selected_location.lng,
             "population": stations.count(),
-            "min": minVal if minVal != None else 0,
-            "max": maxVal if maxVal != None else 0,
-            "avg": round(avgVal if avgVal != None else 0, 2),
+            "min": 0,
+            "max": 0,
+            "avg": 0,
         }
     )
 
