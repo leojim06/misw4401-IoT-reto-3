@@ -552,6 +552,7 @@ def get_data_country(request, **kwargs):
     data_result["start"] = startFormatted
     data_result["end"] = endFormatted
     data_result["data"] = data
+    data_result["location_data"] = [loc_d.str() for loc_d in location_data]
 
     return JsonResponse(data_result)
 
