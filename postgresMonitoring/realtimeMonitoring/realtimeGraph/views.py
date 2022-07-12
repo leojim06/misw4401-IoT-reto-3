@@ -523,7 +523,7 @@ def get_test_data(request, **kwargs):
 
 def get_data_country(request, **kwargs):
     data_result = {}
-    country_name = kwargs.get("country", None)
+    country_name = "Pais1"
     selected_country = Country.objects.filter(name=country_name)[0]
     selected_location = Location.objects.filter(country=selected_country)[0]
 
