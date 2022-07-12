@@ -534,27 +534,30 @@ def get_data_country(request, **kwargs):
 
     data = []
 
+    start_ts = int(start.timestamp() * 1000000)
+    end_ts = int(end.timestamp() * 1000000)
+
     for location in locations:
         stations = Station.objects.filter(location=location)
         locationData = Data.objects.filter(
-            station__in=stations, measurement__name=selectedMeasure.name,  time__gte=start.date(), time__lte=end.date())
+            station__in=stations, measurement__name=selectedMeasure.name, time__gte=start_ts, time__lte=end_ts,
+        )
         if locationData.count() <= 0:
             continue
-        minVal = locationData.aggregate(
-            Min('value'))['value__min']
-        maxVal = locationData.aggregate(
-            Max('value'))['value__max']
-        avgVal = locationData.aggregate(
-            Avg('value'))['value__avg']
-        data.append({
-            'name': f'{location.city.name}, {location.state.name}, {location.country.name}',
-            'lat': location.lat,
-            'lng': location.lng,
-            'population': stations.count(),
-            'min': minVal if minVal != None else 0,
-            'max': maxVal if maxVal != None else 0,
-            'avg': round(avgVal if avgVal != None else 0, 2),
-        })
+        minVal = locationData.aggregate(Min("min_value"))["min_value__min"]
+        maxVal = locationData.aggregate(Max("max_value"))["max_value__max"]
+        avgVal = locationData.aggregate(Avg("avg_value"))["avg_value__avg"]
+        data.append(
+            {
+                "name": f"{location.city.name}, {location.state.name}, {location.country.name}",
+                "lat": location.lat,
+                "lng": location.lng,
+                "population": stations.count(),
+                "min": minVal if minVal != None else 0,
+                "max": maxVal if maxVal != None else 0,
+                "avg": round(avgVal if avgVal != None else 0, 2),
+            }
+        )
 
     startFormatted = start.strftime("%d/%m/%Y") if start != None else " "
     endFormatted = end.strftime("%d/%m/%Y") if end != None else " "

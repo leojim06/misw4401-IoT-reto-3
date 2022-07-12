@@ -569,7 +569,7 @@ def get_data_country(request, **kwargs):
         selectedMeasure = measurements[0]
 
     # locations = Location.objects.all()
-    locations = Location.objects.filter(country=selected_country)
+    locations = Location.objects.filter(country=selected_country)[0]
     try:
         start = datetime.fromtimestamp(
             float(request.GET.get("from", None)) / 1000
