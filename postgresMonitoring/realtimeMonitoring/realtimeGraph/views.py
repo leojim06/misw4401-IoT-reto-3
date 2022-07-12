@@ -530,12 +530,9 @@ def get_data_country(request, **kwargs):
     stations = Station.objects.filter(location=selected_location)
     location_data = Data.objects.filter(station__in=stations)
 
+    print(location_data)
 
     data = []
-
-    # minVal = location_data.aggregate(Min("min_value"))["min_value__min"]
-    # maxVal = location_data.aggregate(Max("max_value"))["max_value__max"]
-    # avgVal = location_data.aggregate(Avg("avg_value"))["avg_value__avg"]
 
     data.append(
         {
