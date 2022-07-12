@@ -531,6 +531,9 @@ def get_data_country(request, **kwargs):
     stations = Station.objects.filter(location=selected_location)
     location_data = Data.objects.filter(station__in=stations)
 
+    for d in location_data:
+        print(d)
+
     data = []
 
     data.append(
@@ -552,7 +555,7 @@ def get_data_country(request, **kwargs):
     data_result["start"] = startFormatted
     data_result["end"] = endFormatted
     data_result["data"] = data
-    data_result["location_data"] = [loc_d.str() for loc_d in location_data]
+    data_result["location_data"] = [d for d in location_data]
 
     return JsonResponse(data_result)
 
