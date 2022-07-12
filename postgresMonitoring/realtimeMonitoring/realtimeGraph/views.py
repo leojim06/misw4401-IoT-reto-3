@@ -519,13 +519,13 @@ La respuesta tiene esta estructura:
 def get_test_data(request, **kwargs):
     return JsonResponse({'foo':'bar'})
 
-    
+
 
 def get_data_country(request, **kwargs):
     data_result = {}
     country_name = kwargs.get("country", None)
     selected_country = Country.objects.filter(name=country_name)[0]
-    selected_location = Location.objects.filter(country=selected_country)
+    selected_location = Location.objects.filter(country=selected_country)[0]
 
     stations = Station.objects.filter(location=selected_location)
     location_data = Data.objects.filter(stations__in=stations)
