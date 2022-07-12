@@ -542,7 +542,6 @@ def get_data_country(request, **kwargs):
             "min": 0,
             "max": 0,
             "avg": 0,
-            "loc": location_data.str(),
         }
     )
 
