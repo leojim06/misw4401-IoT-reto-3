@@ -494,40 +494,6 @@ La respuesta tiene esta estructura:
 def get_test_data(request, **kwargs):
     return JsonResponse({'foo':'bar'})
 
-# def get_data_country(request, **kwargs):
-#     data_result = {}
-#     country_name = request.GET.get("country", "Pais1")
-#     selected_country = Country.objects.filter(name=country_name)[0]
-#     selected_location = Location.objects.filter(country=selected_country)[0]
-#     stations = Station.objects.filter(location=selected_location)
-#     location_data = Data.objects.filter(station__in=stations)
-
-#     data = []
-
-#     data.append(
-#         {
-#             "name": f"{selected_location.city.name}, {selected_location.state.name}, {selected_location.country.name}",
-#             "lat": selected_location.lat,
-#             "lng": selected_location.lng,
-#             "population": stations.count(),
-#             "min": 0,
-#             "max": 0,
-#             "avg": 0,
-#         }
-#     )
-
-#     startFormatted = " "
-#     endFormatted = " "
-
-#     data_result["locations"] = [selected_location.str()]
-#     data_result["start"] = startFormatted
-#     data_result["end"] = endFormatted
-#     data_result["data"] = data
-#     data_result["location_data"] = [len(location_data)]
-
-#     return JsonResponse(data_result)
-
-
 def get_data_country(request, **kwargs):
     data_result = {}
 
@@ -599,6 +565,9 @@ def get_data_country(request, **kwargs):
     data_result["data"] = data
 
     return JsonResponse(data_result)
+
+
+
 
 
 
