@@ -517,9 +517,9 @@ La respuesta tiene esta estructura:
 """
 
 def get_test_data(request, **kwargs):
-    return JsonResponse({ "country", "test" })
+    return JsonResponse({'foo':'bar'})
 
-def get_data_contry(request, **kwargs):
+def get_data_country(request, **kwargs):
     data_result = {}
     country_name = kwargs.get("country", None)
     selected_country = Country.objects.filter(name=country_name)[0]
