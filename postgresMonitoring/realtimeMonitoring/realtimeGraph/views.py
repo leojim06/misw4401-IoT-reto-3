@@ -529,6 +529,7 @@ def get_data_country(request, **kwargs):
 
     stations = Station.objects.filter(location=selected_location)
     location_data = Data.objects.filter(station__in=stations)
+    
 
     data = []
 
