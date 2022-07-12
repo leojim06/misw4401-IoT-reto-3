@@ -531,8 +531,6 @@ def get_data_country(request, **kwargs):
     stations = Station.objects.filter(location=selected_location)
     location_data = Data.objects.filter(station__in=stations)
 
-    # print(json.dumps(location_data, indent=4, sort_keys=True))
-
     data = []
 
     data.append(
